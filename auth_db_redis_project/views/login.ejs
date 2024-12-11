@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Login</h1>
+        <form id="loginForm" onsubmit="(e)=> {
+            console.log(e)
+            e.preventDefault();
+            handleFormSubmit(event)
+        }">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="off">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="off">
+
+            <button type="submit">Login</button>
+            <p class="register-link">Don't have an account? <a href="/register">Register here</a></p>
+        </form>
+        <div id=responseMessage"></div>
+    </div>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent form refresh
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            console.log("Email:", email, "Password:", password);
+
+            fetch("http://localhost:5173/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    if (response.ok) {
+                        document.getElementById("responseMessage").innerHTML = `<p style="color:green;">${result.message}</p>`;
+                    } else {
+                        document.getElementById("responseMessage").innerHTML = `<p style="color:red;">${result.error || "Login failed!"}</p>`;
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    document.getElementById("responseMessage").innerHTML = `<p style="color:red;">Something went wrong. Please try again.</p>`;
+                });
+
+            return false; // Ensure the form doesn't refresh
+        }
+    </script>
+</body>
+</html>

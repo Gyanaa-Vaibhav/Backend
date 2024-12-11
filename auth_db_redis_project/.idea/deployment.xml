@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="KVM1" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;*.hprof;*.pyc,.deployment_ignore " remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="KVM1">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Node_Practice/Auth_DB_Redis_Socket" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="./node_modules " />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
